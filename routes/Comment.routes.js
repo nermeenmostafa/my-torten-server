@@ -20,12 +20,11 @@ router.post('/comments', async (req, res) => {
   // Retrieve all comments
   router.get('/comments', async (req, res) => {
     try {
-      const comments = await Comment.find();
-      const populatedComments = await comments.populate('name')
-      console.log(populatedComments)
-      res.json(populatedComments);
+      const comments = await Comment.find().populate('name')
+      console.log(comments)
+      res.json(comments);
     } catch (error) {
-      res.status(500).json({ error: 'Error retrieving comments' });
+      res.status(500).json({ error:`Error ${error}`});
     }
   });
 
